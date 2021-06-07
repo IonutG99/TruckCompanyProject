@@ -37,5 +37,7 @@ namespace TruckCompany.Web
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
         }
+
+        public DbSet<TruckCompany.Web.Models.Trucker> Trucker { get; set; }
     }
 }

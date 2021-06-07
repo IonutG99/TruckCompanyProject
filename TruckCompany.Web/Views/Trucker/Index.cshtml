@@ -1,66 +1,53 @@
 ﻿@model IEnumerable<Trucker>
-@{
-    ViewData["Title"] = "Truckers";
-}
-<head>
-<title>Table TAP</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->
-<link rel="icon" type="image/png" href="images/icons/favicon.ico" />
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css" href="css/util.css">
-<link rel="stylesheet" type="text/css" href="css/site.css">
-<!--===============================================================================================-->
-</head>
 
-<body>
+<div class="container p-3" >
 
-
-        <div class="limiter">
-            <div class="container-table100">
-
-                <button class="buttonCreate">Add New Employee on Data Base</button>
-
-                <div class="wrap-table100">
-                    <div class="table100">
-                        <table>
-                        <tr>
-                            <th>    FirstName</th>
-                            <th>    LastName</th>
-                            <th>    PhoneNumber</th>
-                            <th>Action Item</th>
-                        </tr>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>@item.FirstName</td>
-                                <td>   @item.LastName</td>
-                                <td>@item.PhoneNumber</td>
-                                <td>
-                                </td>
-                            </tr>
-                        }
-                           </table>
-                    </div>
-                </div>
-            </div>
+    <div class="row pt-4">
+       <div class="col-6">
+           <h2 class="text-primary">Truckers List</h2>
+       </div>
+        <div class="col-6 text-right">
+            <a asp-controller="Trucker" asp-action="Create" class="btn btn-primary">Add new Trucker</a>
         </div>
-
-    </div>
-    </body>
-    <script>
-        var AddEditTrucker = function (Id) {
-            var url = "/"
+        <br/><br />
+        @if (Model.Count() > 0)
+        {
+            <table class="table table-bordered table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>
+                            FirstName
+                        </th>
+                        <th>
+                            LastName
+                        </th>
+                        <th>
+                            PhoneNumber
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var item in Model)
+                    {
+                    <tr>
+                        <td width="35%">@item.FirstName</td>
+                        <td  width="35%">@item.LastName</td>
+                        <td  width="35%">@item.PhoneNumber</td>
+                        <td  width="30%">
+                            <div class="col-6 text-right">
+                                    <a asp-controller="Trucker" asp-action="Update" asp-route-Id="@item.Id" class="btn btn-primary mx-1">Update</a>
+                                    <br />
+                                    <a asp-controller="Trucker" asp-action="Delete" asp-route-Id="@item.Id" class="btn btn-danger mx-1">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                        
+                    }
+                </tbody>
+            </table>
         }
-    </script>
+    </div>
+</div>

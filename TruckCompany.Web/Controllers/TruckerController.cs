@@ -38,64 +38,73 @@ namespace TruckCompany.Web.Controllers
         // GET: TruckerController/Create
         public ActionResult Create()
         {
+
             return View();
         }
 
         // POST: TruckerController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(DomainEntities.Trucker obj)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _dBContext.Truckers.Add(obj);
+            _dBContext.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: TruckerController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Update(Guid? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+            DomainEntities.Trucker obj = _dBContext.Truckers.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            return View(obj);
         }
 
         // POST: TruckerController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Update(DomainEntities.Trucker obj)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _dBContext.Truckers.Update(obj);
+            _dBContext.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: TruckerController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+            DomainEntities.Trucker obj = _dBContext.Truckers.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            return View(obj);
         }
 
         // POST: TruckerController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult DeletePost(Guid? id)
         {
-            try
+            DomainEntities.Trucker obj = _dBContext.Truckers.Find(id);
+            if (obj == null)
             {
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
-            catch
-            {
-                return View();
-            }
+            _dBContext.Truckers.Remove(obj);
+            _dBContext.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
