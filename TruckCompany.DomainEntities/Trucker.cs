@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace TruckCompany.DomainEntities
 {
@@ -10,9 +11,9 @@ namespace TruckCompany.DomainEntities
         {
             Id = Guid.NewGuid();
         }
-
+        [Key]
         public Guid Id { get; set; }
-
+        
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
