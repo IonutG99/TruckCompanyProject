@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TruckCompany.Web.Models
 {
-    public class LocationsModel
+    public class StatusModel
     {
         public int Id { get; set; }
 

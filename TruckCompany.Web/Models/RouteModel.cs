@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace TruckCompany.Web.Models
 {
-    public class RoutesModel
+    public class RouteModel
     {
-        public RoutesModel()
+        public RouteModel()
         {
 
         }
-        public RoutesModel(DomainEntities.AssignRoute route)
+        public RouteModel(DomainEntities.AssignRoute route)
         {
             RouteNumber = route.RouteNumber;
             TruckerId = route.TruckerId;

@@ -11,45 +11,58 @@
     <div class="col-md-4 align-center">
         <form asp-action="Update">
             <input type="hidden" asp-for="Route.RouteNumber" />
-            <dl>
-                <dt class="col-sm-2">
-                    Trucker Name
-                </dt>
-                <dd class="col-sm-10">
-                    <select asp-for="Route.TruckerId" name="TruckerId" id="TruckerId">
-                        @foreach (var item in Model.Truckers)
-                        {
-                            <option value="@item.Id">@item.FirstName&nbsp;@item.LastName</option>
-                        }
-                    </select>
-                </dd>
-                <dt class="col-sm-2">
-                    Destination
-                </dt>
-                <dd class="col-sm-10">
-                    <select asp-for="Route.LocationId" name="LocationId" id="LocationId">
-                        @foreach (var item in Model.Locations)
-                        {
-                            <option value="@item.Id">@item.Name</option>
-                        }
-                    </select>
-                </dd>
-                <dt class="col-sm-2">
-                    Staus
-                </dt>
-                <dd class="col-sm-10">
-                    <select asp-for="Route.StatusId" name="StatusId" id="StatusId">
-                        @foreach (var item in Model.Statuses)
-                        {
-                            <option value="@item.Id">@item.Name</option>
-                        }
-                    </select>
-                </dd>
-            </dl>
+            <table class="table table-bordered table-striped" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>
+                            Trucker Name
+                        </th>
+                        <th>
+                            Destination
+                        </th>
+                        <th>
+                            Status
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>
+                            <select asp-for="Route.TruckerId" name="TruckerId" id="TruckerId">
+                                @foreach (var item in Model.Truckers)
+                                {
+                                    <option value="@item.Id">@item.FirstName&nbsp;@item.LastName</option>
+                                }
+                            </select>
+                        </th>
+                        <th>
+                            <select asp-for="Route.LocationId" name="LocationId" id="LocationId">
+                                @foreach (var item in Model.Locations)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            </select>
+                        </th>
+
+                        <th>
+                            <select asp-for="Route.StatusId" name="StatusId" id="StatusId">
+                                @foreach (var item in Model.Statuses)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            </select>
+                        </th>
+
+                    </tr>
+                </tbody>
+
+            </table>       
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
         </form>
-        <div class="form-group">
-            <input type="submit" value="Save" class="btn btn-primary" />
-        </div>
+
     </div>
 </div>
 <div>

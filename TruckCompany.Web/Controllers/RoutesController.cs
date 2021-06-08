@@ -69,7 +69,7 @@ namespace TruckCompany.Web.Controllers
             IEnumerable<DomainEntities.Trucker> truckers = _dBContext.Truckers;
             IEnumerable<DomainEntities.Status> statuses = _dBContext.Statuses;
             IEnumerable<DomainEntities.Location> locations = _dBContext.Locations;
-            RoutesModel route=new RoutesModel();
+            RouteModel route=new RouteModel();
             CreateModel createModel = new CreateModel
             {
                 Route = route,
@@ -117,7 +117,7 @@ namespace TruckCompany.Web.Controllers
             IEnumerable<DomainEntities.Location> locations = _dBContext.Locations;
             CreateModel createModel = new CreateModel
             {
-                Route = new RoutesModel(obj),
+                Route = new RouteModel(obj),
                 Truckers = truckers,
                 Locations = locations,
                 Statuses = statuses
@@ -125,22 +125,25 @@ namespace TruckCompany.Web.Controllers
             return View(createModel);
         }
 
-        // POST: RoutesController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Update(DomainEntities.AssignRoute routes)
+        public ActionResult Update(int id)
         {
+           
             string val = Request.Form["TruckerId"];
             Guid tId = Guid.Parse(val);
             val = Request.Form["LocationId"];
             int lId = Int32.Parse(val);
             val = Request.Form["StatusId"];
             int sId = Int32.Parse(val);
-            routes.TruckerId = tId;
-            routes.LocationId = lId;
-            routes.StatusId = sId;
-            _dBContext.AssignedRoutes.Add(routes);
-            //_dBContext.AssignedRoutes.AddAsync(routes);
+            DomainEntities.AssignRoute routes = new DomainEntities.AssignRoute
+            {
+                RouteNumber=id,
+                TruckerId=tId,
+                LocationId=lId,
+                StatusId=sId
+            };
+            _dBContext.AssignedRoutes.Update(routes);
             _dBContext.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -165,14 +168,18 @@ namespace TruckCompany.Web.Controllers
         // POST: TruckerController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeletePost(int id)
+        public ActionResult DeletePost(int? id)
         {
-            DomainEntities.AssignRoute obj = _dBContext.AssignedRoutes.Find(id);
-            if (obj == null)
+            string s = Request.Form["DeleteId"];
+            id = Int32.Parse(s);
+            if (id == null)
+                return NotFound();
+            DomainEntities.AssignRoute route = _dBContext.AssignedRoutes.Find(id);
+            if (route == null)
             {
                 return NotFound();
             }
-            _dBContext.AssignedRoutes.Remove(obj);
+            _dBContext.AssignedRoutes.Remove(route);
             _dBContext.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -5,8 +5,13 @@ using System.Threading.Tasks;
 
 namespace TruckCompany.Web.Models
 {
-    public class StatusesModel
+    public class LocationModel
     {
+        public LocationModel(DomainEntities.Location location)
+        {
+            Id = location.Id;
+            Name = location.Name;
+        }
         public int Id { get; set; }
 
         public string Name { get; set; }
