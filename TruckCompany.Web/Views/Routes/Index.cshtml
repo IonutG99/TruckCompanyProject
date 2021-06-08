@@ -1,4 +1,4 @@
-﻿@model RoutesRecords
+﻿@model List<RouteView>
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -17,7 +17,7 @@
             <a asp-controller="Routes" asp-action="Create" class="btn btn-primary"><i class="fas fa-plus"></i>&nbsp;Add new Route</a>
         </div>
         <br /><br />
-        @if (Model.RouteNumbers.Count > 0)
+        @if (Model.Count > 0)
         {
             <table class="table table-bordered table-striped" style="width:100%;">
                 <thead>
@@ -37,19 +37,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @for (int i = 0; i < Model.RouteNumbers.Count; i++)
+                    @foreach(var item in Model)
                     {
                         <tr>
-                            <td width="20%">@Model.TruckerFirstName[i]</td>
-                            <td width="20%">@Model.LocationName[i]</td>
-                            <td width="20%">@Model.StatusName[i]</td>
+                            <td width="20%">@item.TruckerName</td>
+                            <td width="20%">@item.LocationName</td>
+                            <td width="20%">@item.StatusName</td>
                             <td width="50%">
                                 <div>
-                                    <a asp-controller="Routes" asp-action="Details" asp-route-Id="@Model.RouteNumbers[i]" class="btn btn-info"><i class="fas fa-info"></i></a>
-                                    <a asp-controller="Routes" asp-action="Update" asp-route-Id="@Model.RouteNumbers[i]" class="btn btn-primary"><i class="fas fa-user-edit"></i></a>
-                                    <a asp-controller="Routes" asp-action="Delete" asp-route-Id="@Model.RouteNumbers[i]" class="btn btn-danger"><i class="fas fa-user-times"></i></a>
-
+                                    <a asp-controller="Routes" asp-action="Details" asp-route-Id="@item.RouteNumber" class="btn btn-info"><i class="fas fa-info"></i></a>
+                                    <a asp-controller="Routes" asp-action="Update" asp-route-Id="@item.RouteNumber" class="btn btn-primary"><i class="fas fa-user-edit"></i></a>
+                                    <a asp-controller="Routes" asp-action="Delete" asp-route-Id="@item.RouteNumber" class="btn btn-danger"><i class="fas fa-user-times"></i></a>
                                 </div>
+                                 
+
+             
                                  
                           
 

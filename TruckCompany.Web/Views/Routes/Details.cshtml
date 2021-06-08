@@ -1,0 +1,36 @@
+﻿@model RouteView
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Trucker</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TruckerName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TruckerName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LocationName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LocationName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StatusName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StatusName)
+        </dd>
+    </dl>
+
+  
+        <a asp-action="Index" class="btn btn-dark">Back to List</a>
+
+</div>

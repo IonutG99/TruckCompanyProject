@@ -22,38 +22,45 @@ namespace TruckCompany.Web.Controllers
         public ActionResult Index()
         {
             IEnumerable<DomainEntities.AssignRoute> data = _dBContext.AssignedRoutes;
-
+            List<RouteView> views = new List<RouteView>();
             List<int> routeN = new List<int>();
             List<string> truckerN = new List<string>();
             List<string> locationN = new List<string>();
             List<string> statusN = new List<string>();
             foreach (var item in data)
              {
-                 routeN.Add(item.RouteNumber);
+                // routeN.Add(item.RouteNumber);
                 _dBContext = new TruckCompanyDBContext();
                 var objT= _dBContext.Truckers.Single(a => a.Id == item.TruckerId);
-                truckerN.Add(objT.FirstName+" "+objT.LastName);
+               // truckerN.Add(objT.FirstName+" "+objT.LastName);
                 _dBContext = new TruckCompanyDBContext();
                  var objL = _dBContext.Locations.Single(a => a.Id == item.LocationId);
-                locationN.Add(objL.Name);
+               // locationN.Add(objL.Name);
                 _dBContext = new TruckCompanyDBContext();
                 var objS = _dBContext.Statuses.Single(a => a.Id == item.StatusId);
-                statusN.Add(objS.Name);
+                //statusN.Add(objS.Name);
+                RouteView routeView = new RouteView(item.RouteNumber, objT.FirstName + " " + objT.LastName, objL.Name, objS.Name);
+                views.Add(routeView);
             }
-            RoutesRecords routesRecords = new RoutesRecords()
-            {
-                RouteNumbers = routeN,
-                TruckerFirstName = truckerN,
-                LocationName = locationN,
-                StatusName = statusN
-            };
-            return View(routesRecords);
+
+            return View(views);
         }
 
         // GET: RoutesController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            DomainEntities.AssignRoute obj = _dBContext.AssignedRoutes.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            _dBContext = new TruckCompanyDBContext();
+            var objT = _dBContext.Truckers.Single(a => a.Id == obj.TruckerId);
+            _dBContext = new TruckCompanyDBContext();
+            var objL = _dBContext.Locations.Single(a => a.Id == obj.LocationId);
+            _dBContext = new TruckCompanyDBContext();
+            var objS = _dBContext.Statuses.Single(a => a.Id == obj.StatusId);
+            return View(new RouteView(id, objT.FirstName + " " + objT.LastName, objL.Name, objS.Name));
         }
 
         // GET: RoutesController/Create
@@ -94,9 +101,13 @@ namespace TruckCompany.Web.Controllers
         }
 
         // GET: RoutesController/Edit/5
-        public ActionResult Update(int routeNumber)
+        public ActionResult Update(int? id)
         {
-            DomainEntities.AssignRoute obj = _dBContext.AssignedRoutes.Find(routeNumber);
+            if (id == null)
+            {
+                return NotFound();
+            }
+            DomainEntities.AssignRoute obj = _dBContext.AssignedRoutes.Find(id);
             if (obj == null)
             {
                 return NotFound();
@@ -109,7 +120,7 @@ namespace TruckCompany.Web.Controllers
                 Route = new RoutesModel(obj),
                 Truckers = truckers,
                 Locations = locations,
-                Statuses=statuses
+                Statuses = statuses
             };
             return View(createModel);
         }
@@ -117,37 +128,54 @@ namespace TruckCompany.Web.Controllers
         // POST: RoutesController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Update(DomainEntities.AssignRoute routes)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            string val = Request.Form["TruckerId"];
+            Guid tId = Guid.Parse(val);
+            val = Request.Form["LocationId"];
+            int lId = Int32.Parse(val);
+            val = Request.Form["StatusId"];
+            int sId = Int32.Parse(val);
+            routes.TruckerId = tId;
+            routes.LocationId = lId;
+            routes.StatusId = sId;
+            _dBContext.AssignedRoutes.Add(routes);
+            //_dBContext.AssignedRoutes.AddAsync(routes);
+            _dBContext.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: RoutesController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            DomainEntities.AssignRoute obj = _dBContext.AssignedRoutes.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            _dBContext = new TruckCompanyDBContext();
+            var objT = _dBContext.Truckers.Single(a => a.Id == obj.TruckerId);
+            _dBContext = new TruckCompanyDBContext();
+            var objL = _dBContext.Locations.Single(a => a.Id == obj.LocationId);
+            _dBContext = new TruckCompanyDBContext();
+            var objS = _dBContext.Statuses.Single(a => a.Id == obj.StatusId);
+            return View(new RouteView(id,objT.FirstName+" "+objT.LastName,objL.Name,objS.Name));
         }
 
-        // POST: RoutesController/Delete/5
+        // POST: TruckerController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult DeletePost(int id)
         {
-            try
+            DomainEntities.AssignRoute obj = _dBContext.AssignedRoutes.Find(id);
+            if (obj == null)
             {
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
-            catch
-            {
-                return View();
-            }
+            _dBContext.AssignedRoutes.Remove(obj);
+            _dBContext.SaveChanges();
+            return RedirectToAction("Index");
         }
+
     }
 }
