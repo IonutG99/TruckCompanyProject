@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
+using System;
 
 namespace TruckCompany.DataAccess
 {
@@ -18,7 +18,11 @@ namespace TruckCompany.DataAccess
         }
 
         public DbSet<DomainEntities.Trucker> Truckers { get; set; }
+        public DbSet<DomainEntities.AssignRoute> AssignedRoutes { get; set; }
 
+        public DbSet<DomainEntities.Location> Locations { get; set; }
+
+        public DbSet<DomainEntities.Status> Statuses { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
