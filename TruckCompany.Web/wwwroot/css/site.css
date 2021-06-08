@@ -1,433 +1,74 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
-
-/*//////////////////////////////////////////////////////////////////
-[ FONT ]*/
-
-
-@font-face {
-    font-family: OpenSans-Regular;
-    src: url('../fonts/OpenSans/OpenSans-Regular.ttf');
-}
-
-
-
-/*//////////////////////////////////////////////////////////////////
-[ RESTYLE TAG ]*/
-* {
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-}
-
-body, html {
-    height: 100%;
-    font-family: sans-serif;
-}
-
-/* ------------------------------------ */
-a {
-    margin: 0px;
-    transition: all 0.4s;
-    -webkit-transition: all 0.4s;
-    -o-transition: all 0.4s;
-    -moz-transition: all 0.4s;
-}
-
-    a:focus {
-        outline: none !important;
-    }
-
-    a:hover {
-        text-decoration: none;
-    }
-
-/* ------------------------------------ */
-h1, h2, h3, h4, h5, h6 {
-    margin: 0px;
-}
-
-p {
-    margin: 0px;
-}
-
-ul, li {
-    margin: 0px;
-    list-style-type: none;
-}
-
-
-/* ------------------------------------ */
-input {
-    display: block;
-    outline: none;
-    border: none !important;
-}
-
-textarea {
-    display: block;
-    outline: none;
-}
-
-    textarea:focus, input:focus {
-        border-color: transparent !important;
-    }
-
-/* ------------------------------------ */
-button {
-    outline: none !important;
-    border: none;
-    background: transparent;
-}
-
-    button:hover {
-        cursor: pointer;
-    }
-
-iframe {
-    border: none !important;
-}
-
-
-
-
-/*//////////////////////////////////////////////////////////////////
-[ Utiliti ]*/
-
-
-
-
-
-
-/*//////////////////////////////////////////////////////////////////
-[ Table ]*/
-
-.limiter {
-    width: 100%;
-    margin: 0 auto;
-}
-
-.container-table100 {
-    width: 100%;
-    min-height: 100vh;
-    background: #c850c0;
-    background: -webkit-linear-gradient(45deg, #4158d0, #c850c0);
-    background: -o-linear-gradient(45deg, #4158d0, #c850c0);
-    background: -moz-linear-gradient(45deg, #4158d0, #c850c0);
-    background: linear-gradient(45deg, #4158d0, #c850c0);
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    padding: 33px 30px;
-}
-
-.wrap-table100 {
-    width: 1170px;
-}
-
-table {
-    border-spacing: 1;
-    border-collapse: collapse;
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    width: 100%;
-    margin: 0 auto;
-    position: relative;
-}
-
-    table * {
-        position: relative;
-    }
-
-    table td, table th {
-        padding-left: 8px;
-    }
-
-    table thead tr {
-        height: 60px;
-        background: #36304a;
-    }
-
-    table tbody tr {
-        height: 50px;
-    }
-
-        table tbody tr:last-child {
-            border: 0;
-        }
-
-    table td, table th {
-        text-align: left;
-    }
-
-        table td.l, table th.l {
-            text-align: right;
-        }
-
-        table td.c, table th.c {
-            text-align: center;
-        }
-
-        table td.r, table th.r {
-            text-align: center;
-        }
-
-
-.table100-head th {
-    font-family: OpenSans-Regular;
-    font-size: 18px;
-    color: #fff;
-    line-height: 1.2;
-    font-weight: unset;
-}
-
-tbody tr:nth-child(even) {
-    background-color: #f5f5f5;
-}
-
-tbody tr {
-    font-family: OpenSans-Regular;
-    font-size: 15px;
-    color: #808080;
-    line-height: 1.2;
-    font-weight: unset;
-}
-
-.buttonUpdate {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 12px;
-}
-
-.buttonDelete {
-    background-color: #FF0000; /* Red */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 12px;
-}
-
-.buttonCreate {
-    background-color: #FF8C00; /* Dark Orange */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 12px;
-    position: fixed;
-    top: 15px;
-    right: 15px;
-}
-
-tbody tr:hover {
-    color: #555555;
-    background-color: #f5f5f5;
-    cursor: pointer;
-}
-
-.column1 {
-    width: 20px;
-    padding-left: 40px;
-}
-
-.column2 {
-    width: 50px;
-}
-
-.column3 {
-    width: 10px;
-}
-
-.column4 {
-    width: 110px;
-}
-
-.column5 {
-    width: 10px;
-    text-align: right;
-}
-
-.column6 {
-    width: 10px;
-    text-align: right;
-    padding-right: 62px;
-}
-
-
-@media screen and (max-width: 992px) {
-    table {
-        display: block;
-    }
-
-        table > *, table tr, table td, table th {
-            display: block;
-        }
-
-        table thead {
-            display: none;
-        }
-
-        table tbody tr {
-            height: auto;
-            padding: 37px 0;
-        }
-
-            table tbody tr td {
-                padding-left: 40% !important;
-                margin-bottom: 24px;
-            }
-
-                table tbody tr td:last-child {
-                    margin-bottom: 0;
-                }
-
-                table tbody tr td:before {
-                    font-family: OpenSans-Regular;
-                    font-size: 14px;
-                    color: #999999;
-                    line-height: 1.2;
-                    font-weight: unset;
-                    position: absolute;
-                    width: 40%;
-                    left: 30px;
-                    top: 0;
-                }
-
-                table tbody tr td:nth-child(1):before {
-                    content: "Date";
-                }
-
-                table tbody tr td:nth-child(2):before {
-                    content: "Order ID";
-                }
-
-                table tbody tr td:nth-child(3):before {
-                    content: "Name";
-                }
-
-                table tbody tr td:nth-child(4):before {
-                    content: "Price";
-                }
-
-                table tbody tr td:nth-child(5):before {
-                    content: "Quantity";
-                }
-
-                table tbody tr td:nth-child(6):before {
-                    content: "Total";
-                }
-
-    .column4,
-    .column5,
-    .column6 {
-        text-align: left;
-    }
-
-    .column4,
-    .column5,
-    .column6,
-    .column1,
-    .column2,
-    .column3 {
-        width: 100%;
-    }
-
-    tbody tr {
-        font-size: 14px;
-    }
-}
-
-@media (max-width: 576px) {
-    .container-table100 {
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-}
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #0366d6;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
 }
+
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
 }

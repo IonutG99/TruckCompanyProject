@@ -20,20 +20,22 @@ namespace TruckCompany.Web.Controllers
         public ActionResult Index()
         {
             IEnumerable<DomainEntities.Trucker> data = _dBContext.Truckers;
-            return View(data.Select(x => new TruckerModel
-            {
-                Id = x.Id,
-                FirstName = x.FirstName,
-                LastName=x.LastName,
-                PhoneNumber=x.PhoneNumber
-            }
-            )) ;
+            return View(data.Select(x => new TruckerModel(x))) ;
         }
 
         // GET: TruckerController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(Guid? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+            DomainEntities.Trucker obj = _dBContext.Truckers.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            return View(new TruckerModel(obj));
         }
 
         // GET: TruckerController/Create
@@ -65,7 +67,7 @@ namespace TruckCompany.Web.Controllers
             {
                 return NotFound();
             }
-            return View(obj);
+            return View(new TruckerModel(obj));
         }
 
         // POST: TruckerController/Edit/5
@@ -90,7 +92,7 @@ namespace TruckCompany.Web.Controllers
             {
                 return NotFound();
             }
-            return View(obj);
+            return View(new TruckerModel(obj));
         }
 
         // POST: TruckerController/Delete/5
