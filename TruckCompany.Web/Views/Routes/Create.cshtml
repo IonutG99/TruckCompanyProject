@@ -1,0 +1,58 @@
+﻿@model CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+<h1>Create</h1>
+
+<h4>Route</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <dl>
+                <dt class="col-sm-2">
+                    Trucker Name
+                </dt>
+                <dd class="col-sm-10">
+                    <select asp-for="Route.TruckerId" name="TruckerId" id="TruckerId">
+                        @foreach (var item in Model.Truckers)
+                        {
+                            <option value="@item.Id">@item.FirstName&nbsp;@item.LastName</option>
+                        }
+                    </select>
+                </dd>
+                <dt class="col-sm-2">
+                    Destination
+                </dt>
+                <dd class="col-sm-10">
+                    <select asp-for="Route.LocationId" name="LocationId" id="LocationId">
+                        @foreach (var item in Model.Locations)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    </select>
+                </dd>
+                <dt class="col-sm-2">
+                    Staus
+                </dt>
+                <dd class="col-sm-10">
+                    <select asp-for="Route.StatusId" name="StatusId" id="StatusId">
+                        @foreach (var item in Model.Statuses)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    </select>
+                </dd>
+            </dl>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-dark">Back to List</a>
+</div>
