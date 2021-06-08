@@ -109,5 +109,6 @@ namespace TruckCompany.Web.Controllers
             _dBContext.SaveChanges();
             return RedirectToAction("Index");
         }
+
     }
 }
