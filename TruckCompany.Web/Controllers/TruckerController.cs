@@ -105,6 +105,14 @@ namespace TruckCompany.Web.Controllers
             {
                 return NotFound();
             }
+            IEnumerable<DomainEntities.AssignRoute> routes = _dBContext.AssignedRoutes;
+            foreach(var item in routes)
+            {
+                if (item.TruckerId == obj.Id)
+                {
+                    _dBContext.AssignedRoutes.Remove(item);
+                }
+            }
             _dBContext.Truckers.Remove(obj);
             _dBContext.SaveChanges();
             return RedirectToAction("Index");
