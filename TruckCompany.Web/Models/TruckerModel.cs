@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TruckCompany.Web.Models
 {
-    public class Trucker
+    public class TruckerModel
     {
         public Guid Id { get; set; }
         public string FirstName { get; set; }

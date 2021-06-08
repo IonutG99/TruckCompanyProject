@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TruckCompany.Web.Models;
+using TruckCompany.DataAccess;
 
 namespace TruckCompany.Web.Controllers
 {
@@ -19,7 +20,7 @@ namespace TruckCompany.Web.Controllers
         public ActionResult Index()
         {
             IEnumerable<DomainEntities.Trucker> data = _dBContext.Truckers;
-            return View(data.Select(x => new Trucker
+            return View(data.Select(x => new TruckerModel
             {
                 Id = x.Id,
                 FirstName = x.FirstName,
