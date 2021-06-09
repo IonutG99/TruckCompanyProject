@@ -17,7 +17,7 @@ namespace TruckCompany.DataAccess
             this.connectionString = connString;
         }
 
-        public DbSet<DomainEntities.Trucker> Truckers { get; set; }
+        public DbSet<DomainEntities.Trucker> Truckers { get; set; }//table
         public DbSet<DomainEntities.AssignRoute> AssignedRoutes { get; set; }
 
         public DbSet<DomainEntities.Location> Locations { get; set; }
