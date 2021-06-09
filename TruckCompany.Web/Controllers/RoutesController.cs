@@ -23,22 +23,14 @@ namespace TruckCompany.Web.Controllers
         {
             IEnumerable<DomainEntities.AssignRoute> data = _dBContext.AssignedRoutes;
             List<RouteView> views = new List<RouteView>();
-            List<int> routeN = new List<int>();
-            List<string> truckerN = new List<string>();
-            List<string> locationN = new List<string>();
-            List<string> statusN = new List<string>();
             foreach (var item in data)
              {
-                // routeN.Add(item.RouteNumber);
                 _dBContext = new TruckCompanyDBContext();
                 var objT= _dBContext.Truckers.Single(a => a.Id == item.TruckerId);
-               // truckerN.Add(objT.FirstName+" "+objT.LastName);
                 _dBContext = new TruckCompanyDBContext();
                  var objL = _dBContext.Locations.Single(a => a.Id == item.LocationId);
-               // locationN.Add(objL.Name);
                 _dBContext = new TruckCompanyDBContext();
                 var objS = _dBContext.Statuses.Single(a => a.Id == item.StatusId);
-                //statusN.Add(objS.Name);
                 RouteView routeView = new RouteView(item.RouteNumber, objT.FirstName + " " + objT.LastName, objL.Name, objS.Name);
                 views.Add(routeView);
             }
