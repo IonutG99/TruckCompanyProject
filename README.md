@@ -1,4 +1,4 @@
-# TruckCompanyManagement
+# TruckCompany Management App
 
 An application that helps employers manage the work status of employees.
 
